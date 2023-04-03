@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TasteWork;
 using Microsoft.AspNetCore.Mvc.TagHelpers;
 using VacanciesMVC.Models;
+using VacanciesMVC.Services;
 
 namespace VacanciesMVC.Controllers
 {
@@ -26,7 +27,7 @@ namespace VacanciesMVC.Controllers
             var filteredVacancy = db.Vacancy.Where(v => v.TypeVacancy == type);
 
             ViewData["type"] = type;
-            return View(await PaginatedList<Vacancy>.CreateAsync(filteredVacancy, page, 10));
+            return View(await Pagination<Vacancy>.CreateAsync(filteredVacancy, page, 10));
         }
     }
 }
