@@ -1,0 +1,29 @@
+﻿@model IEnumerable<string>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@{
+}
+<style>
+    .category-container ul {
+        -webkit-columns: 2;
+        -moz-columns: 2;
+        columns: 2;
+        list-style-type: none;
+    }
+
+</style>
+<div class="main-container">
+    <div class="category-container">
+        @if(@Model != null)
+        {
+            <ul>
+                @foreach(var c in @Model)
+                {
+                    <li>
+                        <a class="page-link" asp-controller="Vacancy" asp-action="Index" asp-route-type="@c">@c</a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</div>

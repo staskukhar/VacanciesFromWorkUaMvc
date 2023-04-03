@@ -1,0 +1,54 @@
+﻿@model PaginatedList<TasteWork.Vacancy>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<div class="container">
+    <div>
+        <a asp-action="Index" asp-route-type="@ViewData["type"]" asp-route-page="@(Model.PageIndex - 1)"
+        class="btn @prevDisabled">
+            Previous
+        </a>
+        <a asp-action="Index" asp-route-type="@ViewData["type"]" asp-route-page="@(Model.PageIndex + 1)"
+           class="btn @nextDisabled">
+            Next
+        </a>
+    </div>
+    <div>
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-light">
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (@Model != null)
+                {
+                    @foreach (var c in @Model)
+                    {
+                        <tr class="table-primary">
+                            <td>@c.VacancyId</td>
+                            <td>@c.Title</td>
+                            <td>@c.TypeVacancy</td>
+                            <td>
+                                <a class="nav-link" href="@c.Link">More</a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td>Vacancies was`t found</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
